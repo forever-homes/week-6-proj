@@ -23,7 +23,7 @@ Results displayed:
 User enters information (postal code, animal type, sex, age)  
 	1. Postal code is saved to a variable and is used as location parameter in shelter.find call  
 	2. Shelter.find lat and long are saved into variables and used as location parameter in Google Maps call  
-	3. Shelter ID's are saved into an array and then used as shelter ID parameter in shelter.getPets call  
+	3. Shelter ID's are saved into an array and then used as shelter ID parameter in shelter.getPets call
 		3a. Type, Age and Sex inputs are saved as variables and used in shelter.getPets call  
 	4. shelter.getPets call is repeated for each shelter ID in the array (API call is inside a for loop that runs for each shelter ID in the array)  
 	5. Animal type is saved to a variable and is used as animal parameter in each shelter.getPets call    
