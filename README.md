@@ -5,14 +5,15 @@ First page:
 	User inputs:  
 		Postal Code  
 		Animal type  
+		Age (baby, young, adult, senior)  
+		My household has (cats, dogs, children)
 		Submit button  
 	When submit button is clicked:  
 		Full page becomes search bar with inputs/submit and results are displayed below    
 
 Results displayed:  
-	<!-- Nearby shelters are displayed as pins on a map   -->
-	Nearest shelter results are displayed 
-		Gallery style list of animals are displayed beneath shelter  
+	Nearest shelter results are displayed  
+		Gallery style list of all animals are displayed
 			Name, breed, age, sex, description, link to Petfinder page  
 	Other shelters are listed below, when clicked they display animal results    
 
