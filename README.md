@@ -14,7 +14,7 @@ First page:
 Results displayed:  
 	Nearest shelter results are displayed  
 		Gallery style list of all animals are displayed
-			Name, breed, age, sex, description, link to Petfinder page  
+			Name, image, breed, age, sex, description, link to Petfinder page  
 	Other shelters are listed below, when clicked they display animal results    
 
 
