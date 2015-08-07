@@ -9,14 +9,17 @@
 	<form action="">
 		<label for="location">Postal Code (no space):</label>
 		<input type="text" id="postalCode">
+		<input type="submit">
+	</form>
+	<div class="selections">
 		<label for="animal-type">Animal Type:</label>
 		<select name="animal-type" id="animalType">
-			<option value="dogs">Dogs</option>
-			<option value="cats">Cats</option>
-			<option value="birds">Birds</option>
-			<option value="rabbits">Rabbits</option>
+			<option value="dog">Dogs</option>
+			<option value="cat">Cats</option>
+			<option value="bird">Birds</option>
+			<option value="rabbit">Rabbits</option>
 			<option value="smallfurry">Small &amp; Furry</option>
-			<option value="reptiles">Reptiles</option>
+			<option value="reptile">Reptiles</option>
 		</select>
 		<label for="age">Age:</label>
 		<select name="age" id="age">
@@ -31,9 +34,7 @@
 			<option value="noDogs">Dogs</option>
 			<option value="noKids">Kids</option>
 		</select> -->
-		<input type="submit">
-	</form>
-	
+	</div>
 	<div id="resultsContainer"></div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
