@@ -58,24 +58,50 @@ app.showPets = function(index) {
 	$.each(index, function(index,item){
 		var $petContainer = $('<div>').addClass('shelter'); // Container for each shelter
 		var $pets = $('<div>').addClass('petInfo'); // Information for every pet
-		var $indiPet = $('<div>').addClass('indiPet'); // Seperate div for individual pets
-		if (Array.isArray(item.pet)){
-			$.each(item.pet, function(index, pet){
-				if(pet.animal !== undefined) {
-					var $petName = $('<h4>').addClass('petName');
-					$petName.data('type', pet.animal['$t']).data('age',pet.age['$t']);
-					$petName.text(pet.name['$t']);
-					$indiPet.append($petName);
+
+		if (Array.isArray(item.pet)){ // If there is more than one pet at the shelter (pets are in an array)
+			$.each(item.pet, function(index, pet){ // Loop through indexed pet names
+				if(pet.animal !== undefined && pet.media.photos.photo[2]['$t'] !== undefined) { // If there is a pet name listed
+					var $indiPet = $('<div>').addClass('indiPet');
+					var $petName = $('<h4>').addClass('petName'); 
+					var $petAge = $('<h5>').addClass('petAge');
+					var $petSex = $('<h5>').addClass('petSex');
+					var $petPic = $('<img>');
+					var $petDesc = $('<p>').addClass('petDesc');
+					$indiPet.data('type', pet.animal['$t']).data('age',pet.age['$t']); // Add animal type/age data to the animal object
+					$petName.text(pet.name['$t']); 
+					$petAge.text(pet.age['$t']);
+					$petSex.text(pet.sex['$t']);
+					$petPic.attr('src', pet.media.photos.photo[2]['$t']);
+					var petBriefDesc = pet.description['$t'];
+					if (petBriefDesc.length > 400){
+						petBriefDesc = petBriefDesc.substring(0,399)+"...";
+					}
+					$petDesc.text(petBriefDesc);
+					$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
 					$pets.append($indiPet);
 				}
-
 			})
 		} else {
-			if(item.pet !== undefined) {
+			if(item.pet !== undefined && item.pet.media.photos.photo[2]['$t'] !== undefined) {
+				var $indiPet = $('<div>').addClass('indiPet'); 
 				var $petName = $('<h4>').addClass('petName');
+				var $petAge = $('<h5>').addClass('petAge');
+				var $petSex = $('<h5>').addClass('petSex');
+				var $petPic = $('<img>');
+				var $petDesc = $('<p>').addClass('petDesc');
+				$indiPet.data('type',item.pet.animal['$t']).data('age',item.pet.age['$t']);
 				$petName.text(item.pet.name['$t']);
-				$petName.data('type',item.pet.animal['$t']).data('age',item.pet.age['$t']);
-				$pets.append($petName);
+				$petAge.text(item.pet.age['$t']);
+				$petSex.text(item.pet.sex['$t']);
+				$petPic.attr('src', item.pet.media.photos.photo[2]['$t']);
+				var petBriefDesc = item.pet.description['$t'];
+				if (petBriefDesc.length > 400){
+					petBriefDesc = petBriefDesc.substring(0,399)+"...";
+				}
+				$petDesc.text(petBriefDesc);
+				$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
+				$pets.append($indiPet);
 			}
 		};
 		var $shelterName = $('<h3>');
@@ -84,7 +110,7 @@ app.showPets = function(index) {
 		// $breed.text(item.pet.breeds.breed);
 		$petContainer.append($shelterName, $pets);
 		$('#resultsContainer').append($petContainer); // Append all pet information to existing div
-		console.log(item.pet);
+		// console.log(item.pet);
 	});
 
 
@@ -92,7 +118,7 @@ app.showPets = function(index) {
 app.petfilter = function(petType) {
 	// If the data type selected does not equal user selection, hide div marked with that data type
 	//Get all the animals
-	var pets = $('.petName');
+	var pets = $('.indiPet');
 	pets.removeClass('hide');
 	for(var i = 0; i < pets.length; i++) {
 
@@ -103,7 +129,7 @@ app.petfilter = function(petType) {
 	}
 }
 app.agefilter = function(age) {
-	var pets = $('.petName');
+	var pets = $('.indiPet');
 	pets.removeClass('hideAge');
 	for (var i = 0; i < pets.length; i++) {
 		if (pets.eq(i).data('age').toLowerCase() !== age) {
