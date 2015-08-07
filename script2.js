@@ -103,3 +103,55 @@ app.init = function() {
 $(function() {
   app.init();
 });
+
+
+
+
+
+
+
+
+
+
+////////////
+
+
+var app = {};
+
+app.shelters = []; // shelter names that return from findShelter
+app.shelterPets = []; // pets that return from getPets when you pass in the shelter ID
+app.shelterID = []; // ID will pulled from findShelter function, and used to getPets
+
+app.shelterBoth = []; //stores the ids and shelter names together
+
+
+app.findShelter = function() {
+	$.ajax({
+		url: 'http://api.petfinder.com/shelter.find',
+		type: 'GET',
+		dataType: 'jsonp',
+		data: {
+			key: 'bdb306e78ac3127c515483ecdef0c671',
+			location: app.postalCode,
+			format: 'json' // Defined by the API
+		},
+		success: function(results) {
+			for (var i = 0; i < 25; i++){ // Take each shelter ID that is returned
+                var shelter = {};
+                shelter = results.petfinder.shelters.shelter[i].name.$t;
+                app.shelters.push(shelter);
+                app.shelterID.push(results.petfinder.shelters.shelter[i].id.$t); // Push shelterID into empty array
+                shelter = results.petfinder.shelters.shelter[i].name.$t;
+                shelterNum = results.petfinder.shelters.shelter[i].id.$t;
+                var both = {
+                	name: shelter,
+                	id: shelterNum
+                }
+                app.shelterBoth.push(both);
+            }
+			app.getPets(); // Call getPets function after findShelter has run
+			console.log(results);
+
+		}
+	});
+};

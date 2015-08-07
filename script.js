@@ -18,15 +18,15 @@ app.findShelter = function() {
 			format: 'json' // Defined by the API
 		},
 		success: function(results) {
-			for (var i = 0; i < 25; i++){ // Take each shelter ID that is returned
-                // var shelter = {};
-                shelter = results.petfinder.shelters.shelter[i].name.$t;
-                app.shelters.push(shelter);
-                app.shelterID.push(results.petfinder.shelters.shelter[i].id.$t); // Push shelterID into empty array
-
-            }
-			app.getPets(); // Call getPets function after findShelter has run
 			console.log(results);
+			for (var i = 0; i < results.petfinder.shelters.shelter.length; i++){ // Take each shelter ID that is returned
+                // var shelter = {};
+                // shelter = results.petfinder.shelters.shelter[i].name.$t;
+                // app.shelters.push(shelter);
+                app.shelterID.push({ shelterId: results.petfinder.shelters.shelter[i].id.$t, shelterName: results.petfinder.shelters.shelter[i].name.$t}); // Push shelterID into empty array
+            }
+            // console.log(app.shelterID);
+			app.getPets(); // Call getPets function after findShelter has run
 
 		}
 	});
@@ -40,18 +40,19 @@ app.getPets = function() {
 			dataType: 'jsonp',
 			data: {
 				key: 'bdb306e78ac3127c515483ecdef0c671',
-				id: item,
+				id: item.shelterId,
 				format: 'json',
 				animal: app.animalType,
 				age: app.age
 			},
 			success: function(results) {
 				// console.log(results);
-				app.shelterPets.push(results.petfinder.pets.pet);
-				app.showPets(results.petfinder.pets.pet);
+				app.shelterPets.push({ shelterId: item.shelterId, shelterName: item.shelterName, pet: results.petfinder.pets.pet});
+				// console.log(app.shelterPets);
+				// app.showPets(results.petfinder.pets.pet);
 			}
 		});	
-	})
+	});
 };
 
 $('form').on('submit',function(e){
@@ -73,9 +74,8 @@ app.showPets = function(index) {
 		var $petName = $('<h3>');
 		$petName.text(item.name.$t);
 		// var $breed = $('<h4>');
-		// Add in an if statement to leave this part out if the breed is empty, or one of the breeds are empty
-		// $breed.text((item.breeds.breed[0].$t) + ", " + (item.breeds.breed[1].$t));
-		$petContainer.append($petName, $breed);
+		// $breed.text(item.breeds.breed[0].$t + ", " + item.breeds.breed[1].$t);
+		$petContainer.append($petName);
 		$('#resultsContainer').append($petContainer);
 		// console.log(item.name.$t);
 	});
