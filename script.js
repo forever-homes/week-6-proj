@@ -1,6 +1,6 @@
 var app = {};
 
-app.shelters = []; // shelter names that return from findShelter
+// app.shelters = []; // shelter names that return from findShelter
 app.shelterPets = []; // pets that return from getPets when you pass in the shelter ID
 
 app.shelterID = []; // ID will pulled from findShelter function, and used to getPets
@@ -48,10 +48,11 @@ app.getPets = function() {
 			success: function(results) {
 				// console.log(results);
 				app.shelterPets.push({ shelterId: item.shelterId, shelterName: item.shelterName, pet: results.petfinder.pets.pet});
-				// console.log(app.shelterPets);
-				// app.showPets(results.petfinder.pets.pet);
+				app.showPets(app.shelterPets);
 			}
+
 		});	
+
 	});
 };
 
@@ -72,7 +73,8 @@ app.showPets = function(index) {
 		var $petContainer = $('<div>');
 		$petContainer.addClass('petItem');
 		var $petName = $('<h3>');
-		$petName.text(item.name.$t);
+
+		$petName.text(item.pet.name.$t);
 		// var $breed = $('<h4>');
 		// $breed.text(item.breeds.breed[0].$t + ", " + item.breeds.breed[1].$t);
 		$petContainer.append($petName);
