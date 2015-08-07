@@ -1,7 +1,7 @@
 var app = {};
 
 app.shelterPets = []; // pets that return from getPets when you pass in the shelter ID
-app.shelterID = []; // ID will pulled from findShelter function, and used to getPets
+app.shelterID = []; // ID will pulled from findShelter function, and used to getPets..
 
 
 app.findShelter = function() {
