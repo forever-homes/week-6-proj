@@ -21,26 +21,37 @@ app.findShelter = function() {
 			for (var i = 0; i < 25; i++){ // Take each shelter ID that is returned
                 // var shelter = {};
                 shelter = results.petfinder.shelters.shelter[i].name.$t;
-                app.shelters.push(shelter);
-                app.shelterID.push(results.petfinder.shelters.shelter[i].id.$t); // Push shelterID into empty array
-
+                shelterNum = results.petfinder.shelters.shelter[i].id.$t;
+                var both = {
+                	name: shelter,
+                	id: shelterNum
+                }
+                app.shelters.push(both);
+                // app.shelterID.push(results.petfinder.shelters.shelter[i].id.$t); // Push shelterID into empty array
             }
+            return app.shelters;
 			app.getPets(); // Call getPets function after findShelter has run
-			console.log(results);
+			// console.log(results);
+
+			// for (var i = 0; i < 25; i++) {
+			// 	console.log(app.shelters[i].id);
+			// }
 
 		}
 	});
 };
 
 app.getPets = function() {
-	$.each(app.shelterID, function(index, item){ // For each item in the shelterID array, make a call, replacing the ID each time
+	$.each(app.shelter, function(index, item){ // For each item in the shelterID array, make a call, replacing the ID each time
+		// console.log(index, item);
+
 		$.ajax({
 			url: 'http://api.petfinder.com/shelter.getPets',
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
 				key: 'bdb306e78ac3127c515483ecdef0c671',
-				id: item,
+				id: item.id,
 				format: 'json',
 				animal: app.animalType,
 				age: app.age
@@ -72,9 +83,10 @@ app.showPets = function(index) {
 		$petContainer.addClass('petItem');
 		var $petName = $('<h3>');
 		$petName.text(item.name.$t);
-		// var $breed = $('<h4>');
-		// Add in an if statement to leave this part out if the breed is empty, or one of the breeds are empty
-		// $breed.text((item.breeds.breed[0].$t) + ", " + (item.breeds.breed[1].$t));
+		var $shelterName = $('<h4>');
+		$shelterName.text(app.shelters[i].name);
+		var $breed = $('<h4>');
+		$breed.text(item.breeds.breed[0].$t + ", " + item.breeds.breed[1].$t);
 		$petContainer.append($petName, $breed);
 		$('#resultsContainer').append($petContainer);
 		// console.log(item.name.$t);

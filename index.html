@@ -8,14 +8,14 @@
 <body>
 	<form action="">
 		<label for="location">Postal Code (no space):</label>
-		<input type="text" id="location">
+		<input type="text" id="postalCode">
 		<label for="animal-type">Animal Type:</label>
-		<select name="animal-type" id="animal-type">
+		<select name="animal-type" id="animalType">
 			<option value="dogs">Dogs</option>
 			<option value="cats">Cats</option>
 			<option value="birds">Birds</option>
 			<option value="rabbits">Rabbits</option>
-			<option value="smallfurry">Small & Furry</option>
+			<option value="smallfurry">Small &amp; Furry</option>
 			<option value="reptiles">Reptiles</option>
 		</select>
 		<label for="age">Age:</label>
@@ -26,14 +26,16 @@
 			<option value="senior">Senior</option>
 		</select>
 		<label for="household">My household has:</label>
-		<select name="household" id="household">
-			<option value="house-cats">Cats</option>
-			<option value="house-dogs">Dogs</option>
-			<option value="house-kids">Kids</option>
-		</select>
+		<!-- <select name="household" id="household">
+			<option value="noCats">Cats</option>
+			<option value="noDogs">Dogs</option>
+			<option value="noKids">Kids</option>
+		</select> -->
 		<input type="submit">
 	</form>
 	
+	<div id="resultsContainer"></div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="script.js"></script>
 </body>
