@@ -68,7 +68,10 @@ app.showPets = function(index) {
 					var $petSex = $('<h5>').addClass('petSex');
 					var $petPic = $('<img>');
 					var $petDesc = $('<p>').addClass('petDesc');
+					var $petLink = $('<a>');
+					var $petHref = "http://www.petfinder.com/petdetail/" + pet.id['$t'];
 					$indiPet.data('type', pet.animal['$t']).data('age',pet.age['$t']); // Add animal type/age data to the animal object
+					$petLink.attr('href', $petHref);
 					$petName.text(pet.name['$t']); 
 					$petAge.text(pet.age['$t']);
 					$petSex.text(pet.sex['$t']);
@@ -78,8 +81,9 @@ app.showPets = function(index) {
 						petBriefDesc = petBriefDesc.substring(0,399)+"...";
 					}
 					$petDesc.text(petBriefDesc);
+					$pets.append($petLink);
 					$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
-					$pets.append($indiPet);
+					$petLink.append($indiPet);
 				}
 			})
 		} else {
@@ -90,6 +94,8 @@ app.showPets = function(index) {
 				var $petSex = $('<h5>').addClass('petSex');
 				var $petPic = $('<img>');
 				var $petDesc = $('<p>').addClass('petDesc');
+				var $petLink = $('<a>');
+				var $petHref = "http://www.petfinder.com/petdetail/" + item.pet.id['$t'];
 				$indiPet.data('type',item.pet.animal['$t']).data('age',item.pet.age['$t']);
 				$petName.text(item.pet.name['$t']);
 				$petAge.text(item.pet.age['$t']);
@@ -100,12 +106,13 @@ app.showPets = function(index) {
 					petBriefDesc = petBriefDesc.substring(0,399)+"...";
 				}
 				$petDesc.text(petBriefDesc);
+				$pets.append($petLink);
 				$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
-				$pets.append($indiPet);
+				$petLink.append($indiPet);
 			}
 		};
 		var $shelterName = $('<h3>');
-		$shelterName.text(item.shelterName);
+		$shelterName.text(item.shelterName).addClass('shelterTitle');
 		// var $breed = $('<h4>');
 		// $breed.text(item.pet.breeds.breed);
 		$petContainer.append($shelterName, $pets);
@@ -116,15 +123,19 @@ app.showPets = function(index) {
 
 };
 app.petfilter = function(petType) {
-	// If the data type selected does not equal user selection, hide div marked with that data type
-	//Get all the animals
 	var pets = $('.indiPet');
 	pets.removeClass('hide');
 	for(var i = 0; i < pets.length; i++) {
-
-		console.log(pets.eq(i).data('type').toLowerCase() !== petType) 
+		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('type').toLowerCase() !== petType) {
 			pets.eq(i).addClass('hide');
+			$('.shelterTitle').each(function(){
+				if( $(this).siblings().children().children(':not(.hide)').length == 0 ) {
+					$(this).addClass('hide');
+				} else {
+					$(this).removeClass('hide');
+				}
+			})
 		}
 	}
 }
@@ -149,6 +160,7 @@ app.init = function() {
 		var type = $(this).val();
 		// call filter pets function
 		app.petfilter(type);
+		
 	});
 	$('#age').on('change',function(e) {
 		var age = $(this).val();
