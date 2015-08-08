@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forever Homes | Find adoptable pets near you</title>
+	<link href='http://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
+	<link href="http://allfont.net/allfont.css?fonts=montserrat-light" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="style.css">
-	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Dosis:500' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="logo-container">
-		<img src="images/logo.png" alt="Logo" class="logo">
-	</div>
 	<header>
-		<video autoplay loop poster="images/cat.jpg" id="hero-video" muted>
+		<div class="logo-container">
+			<img src="images/logo.png" alt="Logo" class="logo">
+		</div>
+		<video autoplay loop poster="images/cat.png" id="hero-video" muted>
 			<source src="video/missfit.mp4" type="video/mp4">
 		</video>
 		<div class="branding">
@@ -25,11 +27,11 @@
 			</form>
 		</section>
 	</header>
-	<section class="results">
-		<div class="selections">
+	<section class="results" id="results">
+		<div class="selections hide">
 			<!-- <label for="animal-type">Animal Type:</label> -->
-			<select name="animal-type" id="animalType">
-				<option value="" disabled selected>Animal Type</option>
+			<select name="animal-type" id="animalType" >
+				<option value="" disabled selected>Animal Type &#9660</option>
 				<option value="dog">Dogs</option>
 				<option value="cat">Cats</option>
 				<option value="bird">Birds</option>
@@ -39,7 +41,7 @@
 			</select>
 			<!-- <label for="age">Age:</label> -->
 			<select name="age" id="age">
-				<option value="" disabled selected>Age</option>
+				<option value="" disabled selected>Age &#9660</option>
 				<option value="baby">Baby</option>
 				<option value="young">Young</option>
 				<option value="adult">Adult</option>
@@ -48,7 +50,7 @@
 		</div>
 		<div id="resultsContainer"></div>
 		<footer>
-			<p>Built by Laura Anderson, Amanda Milburn, and Jessica Jones &copy; 2015 using the Petfinder API</p>
+			<p>Built by <a href="http://www.twitter.com/lauraand_">Laura Anderson</a>, <a href="http://www.amandamilburn.com">Amanda Milburn</a>, and <a href="http://www.heyjess.ca">Jessica Jones</a> &copy; 2015 using the Petfinder API</p>
 		</footer>
 	</section>
 

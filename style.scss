@@ -8,7 +8,7 @@ $white: #FFFBFB;
 
 //Fonts
 $headingFont: 'Dosis', sans-serif;
-$bodyFont: 'Montserrat', sans-serif;
+$bodyFont: 'Montserrat Light', arial;
 
 html {
 	font-size: 24px;
@@ -33,6 +33,9 @@ h1 {
 	text-shadow: 1px 1px 1px #222;
 	font-size: 3rem;
 	margin: 0;
+	@media all and (max-width: 700px){
+		font-size: 2rem;
+	}
 }
 
 h2 {
@@ -47,22 +50,33 @@ h4 {
 }
 
 h5 {
-	font-size: 0.5rem;
+	font-size: 0.65rem;
 }
 
 p {
-	font-size: 0.5rem;
+	font-size: 0.6rem;
+	line-height: 1.5;
 }
 
 a,
 a:visited {
 	text-decoration: none;
-	color: #222;
+	color: $pink;
+	transition: all 0.25s ease-in-out;
+	&:hover {
+		color: $blue;
+	}
 }
 
 header {
 	height: 100vh;
-	padding: 10% 0;
+	padding: 100px 0;
+	@media all and (max-width: 700px){
+		background: url(images/cat.png) no-repeat;
+		background-size: cover;
+		background-position: center;
+		padding: 20px 0;
+	}
 }
 
 video#hero-video {
@@ -73,19 +87,26 @@ video#hero-video {
 	left: 50%;
 	z-index: -100;
 	transform: translateX(-50%) translateY(-50%);
-	background: url(images/cat.jpg) no-repeat;
+	background: url(images/cat.png) no-repeat;
 	background-size: cover;
+	@media all and (max-width: 700px){
+		display: none;
+	}
 }
 
 .logo-container {
 	position: absolute;
-	left: 10px;
-	top: 10px;
+	left: 20px;
+	top: 20px;
+	@media all and (max-width: 700px){
+		position: static;
+		margin: 0 auto;
+	}
 }
 
 .forms {
 	background: rgba($blue, 0.6);
-	padding: 1.5%;
+	padding: 3%;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -100,10 +121,14 @@ video#hero-video {
 	}
 	input[type="text"],
 	input[type="submit"] {
-		padding: 5px 10px;
+		padding: 10px 15px;
 		margin: 0;
 		font-size: 0.75rem;
 		border: none;
+		@media all and (max-width: 700px){
+			width: 100%;
+			margin: 10px 0;
+		}
 	}
 	::-webkit-input-placeholder {
 		text-align: center;
@@ -113,27 +138,35 @@ video#hero-video {
 		color: #222;
 		border-top-right-radius: 3px;
 		border-bottom-right-radius: 3px;
+		transition: all 0.25s ease-in-out;
+		&:hover {
+			background: lighten($pink, 10);
+		}
 	}
 }
 
 .results {
 	background: $white;
-	padding-top:1.5%;
-	padding-bottom:1.5%;
+}
 
-
+#resultsContainer {
+	padding: 0 5%;
 }
 
 .selections {
+	background: #ffdde1;
+	padding: 5%;
 	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance:none;
 		font-size: 0.75rem;
-		padding: 5px 10px;
-		height: 25px;
+		padding: 10px 15px;
+		// height: 25px;
 		color: #222;
-		width: 150px;
-		border: 1px solid $pink;
+		width: 200px;
+		border: none;
 	}
-	margin: 2.5%;
 }
 
 .petInfo {
@@ -142,22 +175,57 @@ video#hero-video {
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
+	justify-content: flex-start;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	a {
 		width: 30%;
+		margin-bottom: 2.5%;
+		margin-right: 3.33%;
+		transition: all 0.25s ease-in-out;
+		float: left;
+		&:hover {
+			background: #ffdde1;
+		}
+		@media all and (max-width: 800px){
+			width: 45%;
+		}
+
+	}
+}
+
+.indiPet {
+	width: 30%;
+	margin-bottom: 25px;
+	margin-right: 3.33%;
+	@media all and (max-width: 1000px){
+		width: 45%;
+	}
+	@media all and (max-width: 725px) {
+		width: 100%;
 	}
 }
 
 .shelter {
 	text-align: left;
-	background: rgb(255, 217, 235);
-	padding: 2.5%;
+	padding: 2.5% 5%;
 	.shelterTitle {
-		margin: 0;
+		margin: 40px 0;
+		text-transform: uppercase;
 	}
 	.petName {
 		margin: 0;
+	}
+}
+
+.overlay {
+	position: absolute;
+	bottom: 0;
+	color: $white;
+	background: rgba($blue, 0.6);
+	width: 100%;
+	padding: 20px;
+	&:hover {
+		background: rgba($pink, 0.6);
 	}
 }
 
@@ -169,7 +237,8 @@ video#hero-video {
 
 .imgContainer {
 	overflow: hidden;
-	height: 200px;
+	height: 300px;
+	position: relative;
 	img {
 		display: block;
 		width: 100%;
@@ -182,4 +251,8 @@ video#hero-video {
 .hide,
 .hideAge {
   display: none;
+}
+
+footer {
+	padding: 5%;
 }
