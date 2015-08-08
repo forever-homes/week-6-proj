@@ -135,7 +135,7 @@ html {
   font-size: 24px; }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat Light", arial;
   text-align: center;
   color: #222; }
 
@@ -150,6 +150,9 @@ h1 {
   text-shadow: 1px 1px 1px #222;
   font-size: 3rem;
   margin: 0; }
+  @media all and (max-width: 700px) {
+    h1 {
+      font-size: 2rem; } }
 
 h2 {
   font-size: 0.75rem;
@@ -161,19 +164,30 @@ h4 {
   font-size: 0.75rem; }
 
 h5 {
-  font-size: 0.5rem; }
+  font-size: 0.65rem; }
 
 p {
-  font-size: 0.5rem; }
+  font-size: 0.6rem;
+  line-height: 1.5; }
 
 a,
 a:visited {
   text-decoration: none;
-  color: #222; }
+  color: #D1949B;
+  transition: all 0.25s ease-in-out; }
+  a:hover,
+  a:visited:hover {
+    color: #174964; }
 
 header {
   height: 100vh;
-  padding: 10% 0; }
+  padding: 100px 0; }
+  @media all and (max-width: 700px) {
+    header {
+      background: url(images/cat.png) no-repeat;
+      background-size: cover;
+      background-position: center;
+      padding: 20px 0; } }
 
 video#hero-video {
   position: fixed;
@@ -183,17 +197,24 @@ video#hero-video {
   left: 50%;
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
-  background: url(images/cat.jpg) no-repeat;
+  background: url(images/cat.png) no-repeat;
   background-size: cover; }
+  @media all and (max-width: 700px) {
+    video#hero-video {
+      display: none; } }
 
 .logo-container {
   position: absolute;
-  left: 10px;
-  top: 10px; }
+  left: 20px;
+  top: 20px; }
+  @media all and (max-width: 700px) {
+    .logo-container {
+      position: static;
+      margin: 0 auto; } }
 
 .forms {
   background: rgba(23, 73, 100, 0.6);
-  padding: 1.5%;
+  padding: 3%;
   position: absolute;
   bottom: 0;
   width: 100%; }
@@ -206,32 +227,44 @@ video#hero-video {
     border-bottom-left-radius: 3px; }
   .location-form input[type="text"],
   .location-form input[type="submit"] {
-    padding: 5px 10px;
+    padding: 10px 15px;
     margin: 0;
     font-size: 0.75rem;
     border: none; }
+    @media all and (max-width: 700px) {
+      .location-form input[type="text"],
+      .location-form input[type="submit"] {
+        width: 100%;
+        margin: 10px 0; } }
   .location-form ::-webkit-input-placeholder {
     text-align: center; }
   .location-form input[type="submit"] {
     background: #D1949B;
     color: #222;
     border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px; }
+    border-bottom-right-radius: 3px;
+    transition: all 0.25s ease-in-out; }
+    .location-form input[type="submit"]:hover {
+      background: #e0b8bc; }
 
 .results {
-  background: #FFFBFB;
-  padding-top: 1.5%;
-  padding-bottom: 1.5%; }
+  background: #FFFBFB; }
+
+#resultsContainer {
+  padding: 0 5%; }
 
 .selections {
-  margin: 2.5%; }
+  background: #ffdde1;
+  padding: 5%; }
   .selections select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     font-size: 0.75rem;
-    padding: 5px 10px;
-    height: 25px;
+    padding: 10px 15px;
     color: #222;
-    width: 150px;
-    border: 1px solid #D1949B; }
+    width: 200px;
+    border: none; }
 
 .petInfo {
   display: -webkit-flex;
@@ -239,19 +272,49 @@ video#hero-video {
   display: -ms-flex;
   display: -o-flex;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
+  justify-content: flex-start;
+  flex-wrap: wrap; }
   .petInfo a {
-    width: 30%; }
+    width: 30%;
+    margin-bottom: 2.5%;
+    margin-right: 3.33%;
+    transition: all 0.25s ease-in-out;
+    float: left; }
+    .petInfo a:hover {
+      background: #ffdde1; }
+    @media all and (max-width: 800px) {
+      .petInfo a {
+        width: 45%; } }
+
+.indiPet {
+  width: 30%;
+  margin-bottom: 25px;
+  margin-right: 3.33%; }
+  @media all and (max-width: 1000px) {
+    .indiPet {
+      width: 45%; } }
+  @media all and (max-width: 725px) {
+    .indiPet {
+      width: 100%; } }
 
 .shelter {
   text-align: left;
-  background: #ffd9eb;
-  padding: 2.5%; }
+  padding: 2.5% 5%; }
   .shelter .shelterTitle {
-    margin: 0; }
+    margin: 40px 0;
+    text-transform: uppercase; }
   .shelter .petName {
     margin: 0; }
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  color: #FFFBFB;
+  background: rgba(23, 73, 100, 0.6);
+  width: 100%;
+  padding: 20px; }
+  .overlay:hover {
+    background: rgba(209, 148, 155, 0.6); }
 
 .petAge,
 .petSex {
@@ -260,7 +323,8 @@ video#hero-video {
 
 .imgContainer {
   overflow: hidden;
-  height: 200px; }
+  height: 300px;
+  position: relative; }
   .imgContainer img {
     display: block;
     width: 100%;
@@ -271,3 +335,6 @@ video#hero-video {
 .hide,
 .hideAge {
   display: none; }
+
+footer {
+  padding: 5%; }
