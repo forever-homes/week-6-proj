@@ -101,8 +101,8 @@ app.showPets = function(index) {
 				$petSex.text(item.pet.sex['$t']);
 				$petPic.attr('src', item.pet.media.photos.photo[2]['$t']);
 				var petBriefDesc = item.pet.description['$t'];
-				if (petBriefDesc.length > 400){
-					petBriefDesc = petBriefDesc.substring(0,399)+"...";
+				if (petBriefDesc.length > 200){
+					petBriefDesc = petBriefDesc.substring(0,199)+"...";
 				}
 				$petDesc.text(petBriefDesc);
 				$pets.append($petLink);
@@ -143,7 +143,7 @@ app.agefilter = function(age) {
 	pets.removeClass('hideAge');
 	for(var i = 0; i < pets.length; i++) {
 		// If the data type selected does not equal user selection, hide div marked with that data type
-		if (pets.eq(i).data('age').toLowerCase() !== age) {
+		if (pets.eq(i).data('age').toLowerCase() !== age ) {
 			pets.eq(i).addClass('hideAge');
 			$('.shelterTitle').each(function(){
 				if( $(this).siblings().children().children(':not(.hideAge)').length == 0 ) {

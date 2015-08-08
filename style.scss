@@ -1,10 +1,163 @@
 @import "setup";
 
+//Colours
 $blue: #174964;
-$darkPink: #F3C1D9;
+$pink: #D1949B;
 $beige: #EDDAC0;
-$lightPink: #FFFBFB;
+$white: #FFFBFB;
 
+//Fonts
+$headingFont: 'Dosis', sans-serif;
+$bodyFont: 'Montserrat', sans-serif;
+
+html {
+	font-size: 16px;
+}
+
+body {
+	font-family: $bodyFont;
+	text-align: center;
+	color: #222;
+}
+
+img {
+	max-width: 100%;
+}
+
+h1,h2 {
+	color: $white;
+}
+
+h1 {
+	font-family: $headingFont;
+	text-shadow: 1px 1px 1px #222;
+	font-size: 3rem;
+	margin: 0;
+}
+
+h2 {
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	margin-top: 0;
+	font-weight: 400;
+}
+
+p {
+	font-size: 0.5rem;
+}
+
+a,
+a:visited {
+	text-decoration: none;
+	color: #222;
+}
+
+header {
+	height: 100vh;
+	padding: 10% 0;
+}
+
+video#hero-video {
+	position: fixed;
+	min-width: 100%;
+	min-height: 100%;
+	top: 50%;
+	left: 50%;
+	z-index: -100;
+	transform: translateX(-50%) translateY(-50%);
+	background: url(images/dog.jpg) no-repeat;
+	background-size: cover;
+}
+
+.logo-container {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+.forms {
+	background: rgba($blue, 0.6);
+	padding: 1.5%;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.location-form {
+	margin: 2.5%;
+	input[type="text"] {
+		background: $white;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+	input[type="text"],
+	input[type="submit"] {
+		padding: 5px 10px;
+		margin: 0;
+		// width: 20%;
+		font-size: 0.75rem;
+		height: 25px;
+		border: none;
+	}
+	::-webkit-input-placeholder {
+		text-align: center;
+	}
+	input[type="submit"] {
+		background: $pink;
+		color: #222;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+}
+
+.results {
+	background: $white;
+	padding: 2.5%;
+
+}
+
+.selections {
+	select {
+		font-size: 0.75rem;
+		padding: 5px 10px;
+		height: 25px;
+		color: #222;
+		width: 150px;
+		border: 1px solid $pink;
+	}
+	margin: 2.5%;
+}
+
+.petInfo {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	a {
+		width: 30%;
+	}
+}
+
+.shelter {
+	text-align: left;
+	background: rgb(255, 217, 235);
+	padding: 2.5%;
+	.shelterTitle {
+		margin: 0;
+	}
+	.petName {
+		margin: 0;
+	}
+}
+
+.petAge,
+.petSex {
+	margin: 0;
+	display: inline;
+}
 
 .hide,
 .hideAge {

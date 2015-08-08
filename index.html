@@ -2,40 +2,55 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Forever Homes | Find adoptable pets near you</title>
 	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Dosis:500' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<form action="">
-		<label for="location">Postal Code (no space):</label>
-		<input type="text" id="postalCode">
-		<input type="submit">
-	</form>
-	<div class="selections hide">
-		<label for="animal-type">Animal Type:</label>
-		<select name="animal-type" id="animalType">
-			<option value="dog">Dogs</option>
-			<option value="cat">Cats</option>
-			<option value="bird">Birds</option>
-			<option value="rabbit">Rabbits</option>
-			<option value="small & furry">Small &amp; Furry</option>
-			<option value="scales, fins & other">Reptiles</option>
-		</select>
-		<label for="age">Age:</label>
-		<select name="age" id="age">
-			<option value="baby">Baby</option>
-			<option value="young">Young</option>
-			<option value="adult">Adult</option>
-			<option value="senior">Senior</option>
-		</select>
-		<label for="household">My household has:</label>
-		<!-- <select name="household" id="household">
-			<option value="noCats">Cats</option>
-			<option value="noDogs">Dogs</option>
-			<option value="noKids">Kids</option>
-		</select> -->
+	<div class="logo-container">
+		<img src="images/logo.png" alt="Logo" class="logo">
 	</div>
-	<div id="resultsContainer"></div>
+	<header>
+		<video autoplay loop poster="images/dog.jpg" id="hero-video" muted>
+			<source src="video/missfit.mp4" type="video/mp4">
+		</video>
+		<div class="branding">
+			<h1>Forever Homes</h1>
+			<h2>Find adoptable pets near you</h2>
+		</div>
+		<section class="forms">
+			<form action="" class="location-form">
+				<!-- <label for="location">Postal Code/Zip Code:</label> -->
+				<input type="text" id="postalCode" placeholder="Postal/Zip Code"><input type="submit" value="Find Pets">
+			</form>
+		</section>
+	</header>
+	<section class="results">
+		<div class="selections">
+			<!-- <label for="animal-type">Animal Type:</label> -->
+			<select name="animal-type" id="animalType">
+				<option value="" disabled selected>Animal Type</option>
+				<option value="dog">Dogs</option>
+				<option value="cat">Cats</option>
+				<option value="bird">Birds</option>
+				<option value="rabbit">Rabbits</option>
+				<option value="small & furry">Small &amp; Furry</option>
+				<option value="scales, fins & other">Reptiles</option>
+			</select>
+			<!-- <label for="age">Age:</label> -->
+			<select name="age" id="age">
+				<option value="" disabled selected>Age</option>
+				<option value="baby">Baby</option>
+				<option value="young">Young</option>
+				<option value="adult">Adult</option>
+				<option value="senior">Senior</option>
+			</select>
+		</div>
+		<div id="resultsContainer"></div>
+		<footer>
+			<p>Built by Laura Anderson, Amanda Milburn, and Jessica Jones &copy; 2015 using the Petfinder API</p>
+		</footer>
+	</section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="script.js"></script>
