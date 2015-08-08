@@ -3,7 +3,6 @@ var app = {};
 app.shelterPets = []; // pets that return from getPets when you pass in the shelter ID
 app.shelterID = []; // ID will pulled from findShelter function, and used to getPets..
 
-
 app.findShelter = function() {
 	$.ajax({
 		url: 'http://api.petfinder.com/shelter.find',
@@ -142,7 +141,8 @@ app.petfilter = function(petType) {
 app.agefilter = function(age) {
 	var pets = $('.indiPet');
 	pets.removeClass('hideAge');
-	for (var i = 0; i < pets.length; i++) {
+	for(var i = 0; i < pets.length; i++) {
+		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('age').toLowerCase() !== age) {
 			pets.eq(i).addClass('hideAge');
 			$('.shelterTitle').each(function(){
@@ -160,14 +160,13 @@ app.init = function() {
 	$('form').on('submit',function(e){
 		e.preventDefault();
 		app.postalCode = $('#postalCode').val();
+		$('.selections').removeClass('hide');
 		app.findShelter(); // Find all animals available at nearby shelters
 	});	
 	$('#animalType').on('change',function(e) {
 		console.log($(this).val());
 		var type = $(this).val();
-		// call filter pets function
-		app.petfilter(type);
-		
+		app.petfilter(type); // call filter pets function
 	});
 	$('#age').on('change',function(e) {
 		var age = $(this).val();
