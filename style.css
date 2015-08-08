@@ -132,7 +132,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   box-sizing: border-box; }
 
 html {
-  font-size: 16px; }
+  font-size: 24px; }
 
 body {
   font-family: "Montserrat", sans-serif;
@@ -157,6 +157,12 @@ h2 {
   margin-top: 0;
   font-weight: 400; }
 
+h4 {
+  font-size: 0.75rem; }
+
+h5 {
+  font-size: 0.5rem; }
+
 p {
   font-size: 0.5rem; }
 
@@ -177,7 +183,7 @@ video#hero-video {
   left: 50%;
   z-index: -100;
   transform: translateX(-50%) translateY(-50%);
-  background: url(images/dog.jpg) no-repeat;
+  background: url(images/cat.jpg) no-repeat;
   background-size: cover; }
 
 .logo-container {
@@ -203,7 +209,6 @@ video#hero-video {
     padding: 5px 10px;
     margin: 0;
     font-size: 0.75rem;
-    height: 25px;
     border: none; }
   .location-form ::-webkit-input-placeholder {
     text-align: center; }
@@ -215,7 +220,8 @@ video#hero-video {
 
 .results {
   background: #FFFBFB;
-  padding: 2.5%; }
+  padding-top: 1.5%;
+  padding-bottom: 1.5%; }
 
 .selections {
   margin: 2.5%; }
@@ -240,12 +246,27 @@ video#hero-video {
 
 .shelter {
   text-align: left;
-  background: #ffd9eb; }
+  background: #ffd9eb;
+  padding: 2.5%; }
+  .shelter .shelterTitle {
+    margin: 0; }
+  .shelter .petName {
+    margin: 0; }
 
 .petAge,
 .petSex {
   margin: 0;
   display: inline; }
+
+.imgContainer {
+  overflow: hidden;
+  height: 200px; }
+  .imgContainer img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover; }
 
 .hide,
 .hideAge {

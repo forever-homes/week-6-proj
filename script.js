@@ -65,6 +65,7 @@ app.showPets = function(index) {
 					var $petName = $('<h4>').addClass('petName'); 
 					var $petAge = $('<h5>').addClass('petAge');
 					var $petSex = $('<h5>').addClass('petSex');
+					var $imgContainer = $('<div>').addClass('imgContainer');
 					var $petPic = $('<img>');
 					var $petDesc = $('<p>').addClass('petDesc');
 					var $petLink = $('<a>');
@@ -72,7 +73,7 @@ app.showPets = function(index) {
 					$indiPet.data('type', pet.animal['$t']).data('age',pet.age['$t']); // Add animal type/age data to the animal object
 					$petLink.attr('href', $petHref);
 					$petName.text(pet.name['$t']); 
-					$petAge.text(pet.age['$t']);
+					$petAge.text(pet.age['$t'] + ' ');
 					$petSex.text(pet.sex['$t']);
 					$petPic.attr('src', pet.media.photos.photo[2]['$t']);
 					var petBriefDesc = pet.description['$t'];
@@ -81,7 +82,8 @@ app.showPets = function(index) {
 					}
 					$petDesc.text(petBriefDesc);
 					$pets.append($petLink);
-					$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
+					$imgContainer.append($petPic);
+					$indiPet.append($petName, $petAge, $petSex, $imgContainer, $petDesc);
 					$petLink.append($indiPet);
 				}
 			})
@@ -91,13 +93,14 @@ app.showPets = function(index) {
 				var $petName = $('<h4>').addClass('petName');
 				var $petAge = $('<h5>').addClass('petAge');
 				var $petSex = $('<h5>').addClass('petSex');
+				var $imgContainer = $('<div>').addClass('imgContainer');
 				var $petPic = $('<img>');
 				var $petDesc = $('<p>').addClass('petDesc');
 				var $petLink = $('<a>');
 				var $petHref = "http://www.petfinder.com/petdetail/" + item.pet.id['$t'];
 				$indiPet.data('type',item.pet.animal['$t']).data('age',item.pet.age['$t']);
 				$petName.text(item.pet.name['$t']);
-				$petAge.text(item.pet.age['$t']);
+				$petAge.text(item.pet.age['$t'] + ' ');
 				$petSex.text(item.pet.sex['$t']);
 				$petPic.attr('src', item.pet.media.photos.photo[2]['$t']);
 				var petBriefDesc = item.pet.description['$t'];
@@ -106,7 +109,8 @@ app.showPets = function(index) {
 				}
 				$petDesc.text(petBriefDesc);
 				$pets.append($petLink);
-				$indiPet.append($petName, $petAge, $petSex, $petPic, $petDesc);
+				$imgContainer.append($petPic);
+				$indiPet.append($petName, $petAge, $petSex, $imgContainer, $petDesc);
 				$petLink.append($indiPet);
 			}
 		};
