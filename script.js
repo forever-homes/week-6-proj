@@ -135,7 +135,7 @@ app.petfilter = function(petType) {
 				} else {
 					$(this).removeClass('hide');
 				}
-			})
+			});
 		}
 	}
 }
@@ -145,6 +145,13 @@ app.agefilter = function(age) {
 	for (var i = 0; i < pets.length; i++) {
 		if (pets.eq(i).data('age').toLowerCase() !== age) {
 			pets.eq(i).addClass('hideAge');
+			$('.shelterTitle').each(function(){
+				if( $(this).siblings().children().children(':not(.hideAge)').length == 0 ) {
+					$(this).addClass('hideAge');
+				} else {
+					$(this).removeClass('hideAge');
+				}
+			});
 		}
 	}
 }
