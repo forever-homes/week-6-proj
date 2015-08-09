@@ -86,6 +86,7 @@ video#hero-video {
 	top: 50%;
 	left: 50%;
 	z-index: -100;
+	-webkit-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 	background: url(images/cat.png) no-repeat;
 	background-size: cover;
@@ -175,7 +176,9 @@ video#hero-video {
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
+	-webkit-justify-content: flex-start;
 	justify-content: flex-start;
+	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
 	a {
 		width: 30%;
