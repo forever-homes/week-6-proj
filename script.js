@@ -9,10 +9,9 @@ app.findShelter = function() {
 		type: 'GET',
 		dataType: 'jsonp',
 		data: {
-			key: 'bdb306e78ac3127c515483ecdef0c671',
+			key: 'ee6a7449eb1fb9231bb59d7b88510600',
 			location: app.postalCode,
-			format: 'json',
-			count: 50
+			format: 'json'
 		},
 		success: function(results) {
 			for (var i = 0; i < results.petfinder.shelters.shelter.length; i++){ // Take each shelter ID that is returned
@@ -34,10 +33,10 @@ app.getPets = function() {
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
-				key: 'bdb306e78ac3127c515483ecdef0c671',
+				key: 'ee6a7449eb1fb9231bb59d7b88510600',
 				id: item.shelterId,
-				format: 'json',
-				count: 50
+				count: 35,
+				format: 'json'
 			}
 		});
 	});
@@ -165,13 +164,7 @@ app.petfilter = function(petType) {
 		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('type').toLowerCase() !== petType) {
 			pets.eq(i).addClass('hide');
-			$('.shelterTitle').each(function(){
-				if( $(this).siblings().children(':not(.hide)').length === 0 ) {
-					$(this).addClass('hide');
-				} else {
-					$(this).removeClass('hide');
-				}
-			});
+			
 		}
 	}
 };
@@ -182,16 +175,26 @@ app.agefilter = function(age) {
 		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('age').toLowerCase() !== age ) {
 			pets.eq(i).addClass('hideAge');
-			$('.shelterTitle').each(function(){
-				if( $(this).siblings().children(':not(.hideAge)').length === 0 ) {
-					$(this).addClass('hideAge');
-				} else {
-					$(this).removeClass('hideAge');
-				}
-			});
+			
 		}
 	}
 };
+
+$('.shelterTitle').each(function(){
+	if( $(this).siblings().children(':not(.hide)').length === 0 ) {
+		$(this).addClass('hide');
+	} else {
+		$(this).removeClass('hide');
+	}
+});
+
+$('.shelterTitle').each(function(){
+	if( $(this).siblings().children(':not(.hideAge)').length === 0 ) {
+		$(this).addClass('hideAge');
+	} else {
+		$(this).removeClass('hideAge');
+	}
+});
 
 app.init = function() {
 	$('form').on('submit',function(e){
