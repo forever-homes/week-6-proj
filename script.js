@@ -8,17 +8,18 @@ app.findShelter = function() {
 		url: 'http://api.petfinder.com/shelter.find',
 		type: 'GET',
 		dataType: 'jsonp',
+		timeout: 5000,
 		data: {
 			key: 'ee6a7449eb1fb9231bb59d7b88510600',
 			location: app.postalCode,
-			format: 'json'
+			format: 'json',
+			count: 10
 		},
 		success: function(results) {
 			for (var i = 0; i < results.petfinder.shelters.shelter.length; i++){ // Take each shelter ID that is returned
                 app.shelterID.push({ shelterId: results.petfinder.shelters.shelter[i].id.$t, shelterName: results.petfinder.shelters.shelter[i].name.$t}); // Push shelterID into empty array
             }
 			app.getPets(); // Call getPets function after findShelter has run
-			// console.log(results);
 		}
 	});
 };
@@ -164,7 +165,13 @@ app.petfilter = function(petType) {
 		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('type').toLowerCase() !== petType) {
 			pets.eq(i).addClass('hide');
-			
+			$('.shelterTitle').each(function(){
+				if( $(this).siblings().children(':not(.hide)').length === 0 ) {
+					$(this).parent().addClass('hide');
+				} else {
+					$(this).parent().removeClass('hide');
+				}
+			});
 		}
 	}
 };
@@ -175,26 +182,20 @@ app.agefilter = function(age) {
 		// If the data type selected does not equal user selection, hide div marked with that data type
 		if (pets.eq(i).data('age').toLowerCase() !== age ) {
 			pets.eq(i).addClass('hideAge');
-			
+			$('.shelterTitle').each(function(){
+				if( $(this).siblings().children(':not(.hideAge)').length === 0 ) {
+					$(this).parent().addClass('hideAge');
+				} else {
+					$(this).parent().removeClass('hideAge');
+				}
+			});
 		}
 	}
 };
 
-$('.shelterTitle').each(function(){
-	if( $(this).siblings().children(':not(.hide)').length === 0 ) {
-		$(this).addClass('hide');
-	} else {
-		$(this).removeClass('hide');
-	}
-});
 
-$('.shelterTitle').each(function(){
-	if( $(this).siblings().children(':not(.hideAge)').length === 0 ) {
-		$(this).addClass('hideAge');
-	} else {
-		$(this).removeClass('hideAge');
-	}
-});
+
+
 
 app.init = function() {
 	$('form').on('submit',function(e){
@@ -207,7 +208,8 @@ app.init = function() {
 		$('html,body').animate({
 			scrollTop: $('#results').offset().bottom
 		}, 1000);
-	});	
+	});
+
 	$('#animalType').on('change',function(e) {
 		console.log($(this).val());
 		var type = $(this).val();
