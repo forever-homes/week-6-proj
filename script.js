@@ -8,12 +8,10 @@ app.findShelter = function() {
 		url: 'http://api.petfinder.com/shelter.find',
 		type: 'GET',
 		dataType: 'jsonp',
-		timeout: 5000,
 		data: {
 			key: 'ee6a7449eb1fb9231bb59d7b88510600',
 			location: app.postalCode,
-			format: 'json',
-			count: 10
+			format: 'json'
 		},
 		success: function(results) {
 			for (var i = 0; i < results.petfinder.shelters.shelter.length; i++){ // Take each shelter ID that is returned
@@ -42,9 +40,10 @@ app.getPets = function() {
 		});
 	});
 	// We then have to use this .apply method to say, Hey take all these arguments and apply them to this method
-	$.when.apply(null, calls).then(function() {
+	$.when.apply(null, calls).always(function() {
 		//arguments is a special keyword that lists all the arguments that are passed into a function
 		//that way we don't have to know how many calls there were, but we can still get all the info back
+		console.log(arguments);
 		app.shelterPets = $.map(arguments, function(item, i) {
 			var item = item[0].petfinder;
 			return { shelterId: app.shelterID[i].shelterId, shelterName: app.shelterID[i].shelterName, pet: item.pets.pet };
@@ -201,6 +200,7 @@ app.init = function() {
 	$('form').on('submit',function(e){
 		e.preventDefault();
 		app.postalCode = $('#postalCode').val();
+		$('#resultsContainer').empty();
 		$('.selections').removeClass('hide');
 		app.findShelter(); // Find all animals available at nearby shelters
 
