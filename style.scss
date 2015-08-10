@@ -152,6 +152,7 @@ video#hero-video {
 
 #resultsContainer {
 	padding: 0 5%;
+	position: relative;
 }
 
 .selections {
@@ -176,7 +177,7 @@ video#hero-video {
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
-	-webkit-justify-content: flex-start;
+	justify-content: flex-start;
 	justify-content: flex-start;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
