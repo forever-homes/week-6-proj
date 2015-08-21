@@ -39,7 +39,6 @@ app.getPets = function() {
 			}
 		});
 	});
-	console.log(calls);
 	// We then have to use this .apply method to say, Hey take all these arguments and apply them to this method
 	$.when.apply(null, calls).always(function() {
 		//arguments is a special keyword that lists all the arguments that are passed into a function
@@ -49,7 +48,6 @@ app.getPets = function() {
 			return { shelterId: app.shelterID[i].shelterId, shelterName: app.shelterID[i].shelterName, pet: item.pets.pet };
 		});
 		app.showPets(app.shelterPets);
-		console.log(app.shelterPets);
 	});
 };
 
@@ -77,7 +75,6 @@ app.showPets = function(index) {
 		// $breed.text(item.pet.breeds.breed);
 		$petContainer.append($shelterName, $pets);
 		$('#resultsContainer').append($petContainer); // Append all pet information to existing div
-		// console.log(item.pet);
 	});
 	$('html,body').animate({
 		scrollTop: $('#results').offset().top
@@ -112,7 +109,6 @@ app.displayPetPhotos = function($petContainer, $pets, petData) {
 	}
 	$petPic.attr('src', petData.media.photos.photo[2]['$t']);
 	var petBriefDesc = petData.description['$t'];
-	console.log(petBriefDesc);
 	if (petBriefDesc && petBriefDesc.length > 150){
 		petBriefDesc = petBriefDesc.substring(0,149)+"...";
 	}
@@ -184,7 +180,6 @@ app.init = function() {
 	});
 
 	$('#animalType').on('change',function(e) {
-		console.log($(this).val());
 		var type = $(this).val();
 		app.petfilter(type); // call filter pets function
 	});
