@@ -43,13 +43,11 @@ app.getPets = function() {
 	$.when.apply(null, calls).always(function() {
 		//arguments is a special keyword that lists all the arguments that are passed into a function
 		//that way we don't have to know how many calls there were, but we can still get all the info back
-		console.log(arguments);
 		app.shelterPets = $.map(arguments, function(item, i) {
 			var item = item[0].petfinder;
 			return { shelterId: app.shelterID[i].shelterId, shelterName: app.shelterID[i].shelterName, pet: item.pets.pet };
 		});
 		app.showPets(app.shelterPets);
-		console.log(app.shelterPets);
 	});
 };
 
@@ -63,87 +61,12 @@ app.showPets = function(index) {
 		if (Array.isArray(item.pet)){ // If there is more than one pet at the shelter (pets are in an array)
 			$.each(item.pet, function(index, pet){ // Loop through indexed pet names
 				if(pet.animal !== undefined && pet.media.photos.photo[2]['$t'] !== undefined) { // If there is a pet name listed
-					var $indiPet = $('<div>').addClass('indiPet');
-					var $petOverlay = $('<div>').addClass('overlay');
-					var $petName = $('<h4>').addClass('petName'); 
-					var $petAge = $('<h5>').addClass('petAge');
-					var $petSex = $('<h5>').addClass('petSex');
-					var $imgContainer = $('<div>').addClass('imgContainer');
-					var $petPic = $('<img>');
-					var $petDesc = $('<p>').addClass('petDesc');
-					var $petLink = $('<a>');
-					var $petHref = "http://www.petfinder.com/petdetail/" + pet.id['$t'];
-					$indiPet.data('type', pet.animal['$t']).data('age',pet.age['$t']); // Add animal type/age data to the animal object
-					$petLink.attr('href', $petHref);
-					$petName.text(pet.name['$t']); 
-					$petAge.text(pet.age['$t'] + ' ');
-					// $petSex.text(pet.sex['$t']);
-					var petSex = pet.sex['$t'];
-	                    if (petSex === 'F') {
-	                        $petSex.text('Female');
-	                    } else if (petSex === 'M') {
-	                        $petSex.text('Male');
-                    } else {
-                    	$petSex.text('');
-                    }
-					$petPic.attr('src', pet.media.photos.photo[2]['$t']);
-					var petBriefDesc = pet.description['$t'];
-					if (petBriefDesc.length > 150){
-						petBriefDesc = petBriefDesc.substring(0,149)+"...";
-					}
-					$petDesc.text(petBriefDesc);
-					//Append pet name, age and sex to overlay
-					$petOverlay.append($petName, $petAge, $petSex);
-					//Append overlay to a link
-					$petLink.append($petOverlay);
-					//Append link to image container
-					$imgContainer.append($petPic, $petLink);
-					//Append image container and description to individual pet container
-					$indiPet.append($imgContainer, $petDesc);
-					//Append individual pet container to container that holds all pets at a shelter
-					$pets.append($indiPet);
+					app.displayPetPhotos($petContainer, $pets, pet);
 				}
 			});
 		} else {
 			if(item.pet !== undefined && item.pet.media.photos.photo[2]['$t'] !== undefined) {
-				var $indiPet = $('<div>').addClass('indiPet'); 
-				var $petOverlay = $('<div>').addClass('overlay');
-				var $petName = $('<h4>').addClass('petName');
-				var $petAge = $('<h5>').addClass('petAge');
-				// var $petSex = $('<h5>').addClass('petSex');
-				var petSex = item.pet.sex['$t'];
-                    if (petSex === 'F') {
-                        $petSex.text('Female');
-                    } else if (petSex === 'M'){
-                        $petSex.text('Male');
-                	} else {
-                		$petSex.text('');
-                	}
-				var $imgContainer = $('<div>').addClass('imgContainer');
-				var $petPic = $('<img>');
-				var $petDesc = $('<p>').addClass('petDesc');
-				var $petLink = $('<a>');
-				var $petHref = "http://www.petfinder.com/petdetail/" + item.pet.id['$t'];
-				$indiPet.data('type',item.pet.animal['$t']).data('age',item.pet.age['$t']);
-				$petName.text(item.pet.name['$t']);
-				$petAge.text(item.pet.age['$t'] + ' ');
-				$petSex.text(item.pet.sex['$t']);
-				$petPic.attr('src', item.pet.media.photos.photo[2]['$t']);
-				var petBriefDesc = item.pet.description['$t'];
-				if (petBriefDesc.length > 150){
-					petBriefDesc = petBriefDesc.substring(0,149)+"...";
-				}
-				$petDesc.text(petBriefDesc);
-				//Append pet name, age and sex to overlay
-				$petOverlay.append($petName, $petAge, $petSex);
-				//Append overlay to a link
-				$petLink.append($petOverlay);
-				//Append link to image container
-				$imgContainer.append($petPic, $petLink);
-				//Append image container and description to individual pet container
-				$indiPet.append($imgContainer, $petDesc);
-				//Append individual pet container to container that holds all pets at a shelter
-				$pets.append($indiPet);
+				app.displayPetPhotos($petContainer, $pets, item.pet);
 			}
 		}
 		var $shelterName = $('<h3>');
@@ -152,9 +75,54 @@ app.showPets = function(index) {
 		// $breed.text(item.pet.breeds.breed);
 		$petContainer.append($shelterName, $pets);
 		$('#resultsContainer').append($petContainer); // Append all pet information to existing div
-		// console.log(item.pet);
 	});
+	$('html,body').animate({
+		scrollTop: $('#results').offset().top
+	}, 1000);
 
+};
+
+app.displayPetPhotos = function($petContainer, $pets, petData) {
+
+	var $indiPet = $('<div>').addClass('indiPet');
+	var $petOverlay = $('<div>').addClass('overlay');
+	var $petName = $('<h4>').addClass('petName'); 
+	var $petAge = $('<h5>').addClass('petAge');
+	var $petSex = $('<h5>').addClass('petSex');
+	var $imgContainer = $('<div>').addClass('imgContainer');
+	var $petPic = $('<img>');
+	var $petDesc = $('<p>').addClass('petDesc');
+	var $petLink = $('<a>');
+	var $petHref = "http://www.petfinder.com/petdetail/" + petData.id['$t'];
+	$indiPet.data('type', petData.animal['$t']).data('age',petData.age['$t']); // Add animal type/age data to the animal object
+	$petLink.attr('href', $petHref);
+	$petName.text(petData.name['$t']); 
+	$petAge.text(petData.age['$t'] + ' ');
+	// $petSex.text(pet.sex['$t']);
+	var petSex = petData.sex['$t'];
+	    if (petSex === 'F') {
+	        $petSex.text('Female');
+	    } else if (petSex === 'M') {
+	        $petSex.text('Male');
+	} else {
+		$petSex.text('');
+	}
+	$petPic.attr('src', petData.media.photos.photo[2]['$t']);
+	var petBriefDesc = petData.description['$t'];
+	if (petBriefDesc && petBriefDesc.length > 150){
+		petBriefDesc = petBriefDesc.substring(0,149)+"...";
+	}
+	$petDesc.text(petBriefDesc);
+	//Append pet name, age and sex to overlay
+	$petOverlay.append($petName, $petAge, $petSex);
+	//Append overlay to a link
+	$petLink.append($petOverlay);
+	//Append link to image container
+	$imgContainer.append($petPic, $petLink);
+	//Append image container and description to individual pet container
+	$indiPet.append($imgContainer, $petDesc);
+	//Append individual pet container to container that holds all pets at a shelter
+	$pets.append($indiPet);
 
 };
 app.petfilter = function(petType) {
@@ -165,7 +133,7 @@ app.petfilter = function(petType) {
 		if (pets.eq(i).data('type').toLowerCase() !== petType) {
 			pets.eq(i).addClass('hide');
 			$('.shelterTitle').each(function(){
-				if( $(this).siblings().children(':not(.hide)').length === 0 ) {
+				if( $(this).siblings().children(':not(.hide):not(.hideAge)').length === 0 ) {
 					$(this).parent().addClass('hide');
 				} else {
 					$(this).parent().removeClass('hide');
@@ -182,7 +150,7 @@ app.agefilter = function(age) {
 		if (pets.eq(i).data('age').toLowerCase() !== age ) {
 			pets.eq(i).addClass('hideAge');
 			$('.shelterTitle').each(function(){
-				if( $(this).siblings().children(':not(.hideAge)').length === 0 ) {
+				if( $(this).siblings().children(':not(.hideAge):not(.hide)').length === 0 ) {
 					$(this).parent().addClass('hideAge');
 				} else {
 					$(this).parent().removeClass('hideAge');
@@ -201,17 +169,17 @@ app.init = function() {
 		e.preventDefault();
 		app.postalCode = $('#postalCode').val();
 		$('#resultsContainer').empty();
+		app.shelterPets = [];
+		app.shelterID = [];
 		$('.selections').removeClass('hide');
 		app.findShelter(); // Find all animals available at nearby shelters
 
 		// Scroll down to results section
-		$('html,body').animate({
-			scrollTop: $('#results').offset().bottom
-		}, 1000);
+
+	
 	});
 
 	$('#animalType').on('change',function(e) {
-		console.log($(this).val());
 		var type = $(this).val();
 		app.petfilter(type); // call filter pets function
 	});
